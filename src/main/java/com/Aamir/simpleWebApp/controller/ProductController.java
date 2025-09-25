@@ -22,7 +22,7 @@ public class ProductController {
 
     @RequestMapping("/products/{prodId}")
     public Product getProductById(@PathVariable int prodId){
-        return service.getProductViaStream(prodId);
+        return service.getProductById(prodId);
     }
 
     @PostMapping("/products")
