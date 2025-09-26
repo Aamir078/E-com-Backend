@@ -10,10 +10,16 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping("/api")
 public class ProductController {
 
-    @Autowired
+
     ProductService service;
+
+    @Autowired
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
 
     @RequestMapping("/products")
     public List<Product> getProducts(){

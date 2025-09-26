@@ -46,3 +46,7 @@ build/
 # Inside src, ignore build/target if generated
 src/**/target/
 src/**/build/
+
+
+application.properties
+forClearingPurpose.java
