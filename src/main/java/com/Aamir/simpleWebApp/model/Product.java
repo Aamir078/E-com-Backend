@@ -2,13 +2,11 @@ package com.Aamir.simpleWebApp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+
+import java.util.Arrays;
 import java.util.Date;
 
 @Component
@@ -25,15 +23,23 @@ public class Product {
    private double price;
    private String category;
 
-   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
    private Date releaseDate;
    private boolean available;
+
+   private String imageName;
+   private String imageType;
+   // when you are working with large data and want to store in
+   // database you have to use Annotation like large object
+   @Lob
+   private byte[] imageDate;
 
    public Product(){}
 
     public Product(int id, String name, String description,
                    String brand, double price, String category,
-                   Date releaseDate, boolean available) {
+                   Date releaseDate, boolean available, String imageName,
+                   String imageType, byte[] imageDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,6 +48,9 @@ public class Product {
         this.category = category;
         this.releaseDate = releaseDate;
         this.available = available;
+        this.imageName = imageName;
+        this.imageType = imageType;
+        this.imageDate = imageDate;
     }
 
     public int getId() {
@@ -108,6 +117,30 @@ public class Product {
         this.available = available;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageDate() {
+        return imageDate;
+    }
+
+    public void setImageDate(byte[] imageDate) {
+        this.imageDate = imageDate;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Product{");
@@ -119,6 +152,9 @@ public class Product {
         sb.append(", category='").append(category).append('\'');
         sb.append(", releaseDate=").append(releaseDate);
         sb.append(", available=").append(available);
+        sb.append(", imageName='").append(imageName).append('\'');
+        sb.append(", imageType='").append(imageType).append('\'');
+        sb.append(", imageDate=").append(Arrays.toString(imageDate));
         sb.append('}');
         return sb.toString();
     }

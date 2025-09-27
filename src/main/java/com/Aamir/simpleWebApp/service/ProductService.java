@@ -3,9 +3,10 @@ import com.Aamir.simpleWebApp.model.Product;
 import com.Aamir.simpleWebApp.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
-
+import java.io.IOException;
 import java.util.List;
 
 
@@ -21,11 +22,17 @@ public class ProductService {
 
     public Product getProductById(int prodId){
 
-      return repo.findById(prodId).get();
+      return repo.findById(prodId).orElse(null);
     }
 
-    public void addProduct(Product prod){
-       repo.save(prod);
+    public Product addProduct(Product product, MultipartFile imageFile) throws IOException {
+        product.setImageName(imageFile.getOriginalFilename());
+        product.setImageType(imageFile.getContentType());
+        product.setImageDate(imageFile.getBytes());
+
+        return repo.save(product);
+
+
     }
 
     public void updateProduct(Product prod) {
@@ -35,5 +42,7 @@ public class ProductService {
     public void deleteProduct(int prodId) {
         repo.deleteById(prodId);
     }
+
+
 }
 
