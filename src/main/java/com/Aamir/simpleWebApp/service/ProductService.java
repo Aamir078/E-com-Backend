@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.function.Predicate;
+
 
 @Service
 public class ProductService {
@@ -28,12 +28,9 @@ public class ProductService {
        repo.save(prod);
     }
 
-
     public void updateProduct(Product prod) {
         repo.save(prod);
     }
-
-
 
     public void deleteProduct(int prodId) {
         repo.deleteById(prodId);

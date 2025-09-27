@@ -1,6 +1,7 @@
 package com.Aamir.simpleWebApp.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,12 +19,13 @@ public class Product {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Id
    private int id;
-
    private String name;
    private String description;
    private String brand;
    private double price;
    private String category;
+
+   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
    private Date releaseDate;
    private boolean available;
 
@@ -31,14 +33,14 @@ public class Product {
 
     public Product(int id, String name, String description,
                    String brand, double price, String category,
-                   Date realeaseDate, boolean available) {
+                   Date releaseDate, boolean available) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.brand = brand;
         this.price = price;
         this.category = category;
-        this.releaseDate = realeaseDate;
+        this.releaseDate = releaseDate;
         this.available = available;
     }
 
@@ -90,12 +92,12 @@ public class Product {
         this.category = category;
     }
 
-    public Date getRealeaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setRealeaseDate(Date realeaseDate) {
-        this.releaseDate = realeaseDate;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public boolean isAvailable() {
@@ -115,7 +117,7 @@ public class Product {
         sb.append(", brand='").append(brand).append('\'');
         sb.append(", price=").append(price);
         sb.append(", category='").append(category).append('\'');
-        sb.append(", realeaseDate=").append(releaseDate);
+        sb.append(", releaseDate=").append(releaseDate);
         sb.append(", available=").append(available);
         sb.append('}');
         return sb.toString();
